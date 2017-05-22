@@ -25,8 +25,8 @@ def get_price(client=client, currency_pair='ETH-USD', price_type='spot'):
 
 def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot'):
 
-    '''Get a string detailing current time in UTC, currency pair requested,
-    price, and currency value.
+    '''Get a string detailing current time in UTC, price type,
+    currency pair requested, price, and currency value.
     `price_type` may be 'spot', 'buy', or 'sell'.
     Returns a string.'''
     price = get_price(
@@ -35,9 +35,10 @@ def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot'):
         price_type='spot'
     )
 
-    return '[%s] %s: %s %s' % (
+    return '[%s] %s %s: %s %s' % (
         str(datetime.datetime.utcnow()).split('.')[0],
         currency_pair,
+        price_type,
         price.amount,
         price.currency
     )
