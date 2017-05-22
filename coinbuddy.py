@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import datetime
+import pricelogger
 import apikeys
 
 from coinbase.wallet.client import Client
@@ -23,23 +23,29 @@ def get_price(client=client, currency_pair='ETH-USD', price_type='spot'):
 
     return client._make_api_object(response, APIObject)
 
-def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot'):
+def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot', log=True):
 
-    '''Get a string detailing current time in UTC, price type,
-    currency pair requested, price, and currency value.
+    '''Get a string detailing price type, currency pair requested, price, and
+    currency value.
     `price_type` may be 'spot', 'buy', or 'sell'.
+    If `log` == `True`, logs price data retrieved.
     Returns a string.'''
+
     price = get_price(
         client=client,
         currency_pair=currency_pair,
         price_type='spot'
     )
 
-    return '[%s] %s %s: %s %s' % (
-        str(datetime.datetime.utcnow()).split('.')[0],
+    result = '%s %s: %s %s' % (
         currency_pair,
         price_type,
         price.amount,
         price.currency
     )
+    
+    if log:
+        pricelogger.log(result)
+
+    return result
 
