@@ -5,6 +5,8 @@ import apikeys
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
+import time
+
 # TODO: Move to OAuth instead of using API keys.
 
 client = Client(apikeys.api_key, apikeys.api_secret)
@@ -48,4 +50,18 @@ def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot', 
         pricelogger.log(result)
 
     return result
+
+def log_prices(
+    client=client,
+    currency_pair='ETH-USD',
+    price_type='spot',
+    interval_sec=30
+):
+    while True:
+        get_price_string(
+            client=client,
+            currency_pair=currency_pair,
+            price_type=price_type
+        )
+        time.sleep(interval_sec)
 
