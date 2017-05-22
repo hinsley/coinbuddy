@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 import datetime
+import apikeys
 
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
 # TODO: Move to OAuth instead of using API keys.
-api_key = ''
-api_secret = ''
-account_id = ''
 
-client = Client(api_key, api_secret)
+client = Client(apikeys.api_key, apikeys.api_secret)
 
-def get_account(client=client, account_id=account_id):
+def get_account(client=client, account_id=apikeys.account_id):
     '''Get description of wallet account.'''
     return client.get_account(account_id)
 
