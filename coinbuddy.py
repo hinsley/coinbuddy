@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 import datetime
+
+# TODO: Move to OAuth instead of using API keys.
 import apikeys
 
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
-
-# TODO: Move to OAuth instead of using API keys.
 
 client = Client(apikeys.api_key, apikeys.api_secret)
 
