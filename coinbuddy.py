@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-import pricelogger
+
+# TODO: Move to OAuth instead of using API keys.
 import apikeys
+import pricelogger
 
 from coinbase.wallet.client import Client
 from coinbase.wallet.model import APIObject
 
 import time
-
-# TODO: Move to OAuth instead of using API keys.
 
 client = Client(apikeys.api_key, apikeys.api_secret)
 
@@ -57,6 +57,7 @@ def log_prices(
     price_type='spot',
     interval_sec=30
 ):
+
     while True:
         get_price_string(
             client=client,
