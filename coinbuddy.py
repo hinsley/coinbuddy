@@ -21,9 +21,13 @@ def get_price(client=client, currency_pair='ETH-USD', price_type='spot'):
     `price_type` may be 'spot', 'buy', or 'sell'.
     Returns an APIObject with two fields: `amount`, `currency`.'''
 
-    response = client._get('v2', 'prices', currency_pair, price_type)
-
-    return client._make_api_object(response, APIObject)
+    while True:
+        try:
+            response = client._get('v2', 'prices', currency_pair, price_type)
+            return client._make_api_object(response, APIObject)
+        except ValueError:
+            # TODO: Add error logging.
+            pass
 
 def get_price_string(client=client, currency_pair='ETH-USD', price_type='spot', log=True):
 
