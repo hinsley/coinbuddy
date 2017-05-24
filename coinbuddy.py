@@ -25,7 +25,7 @@ def get_price(client=client, currency_pair='ETH-USD', price_type='spot'):
         try:
             response = client._get('v2', 'prices', currency_pair, price_type)
             return client._make_api_object(response, APIObject)
-        except ValueError:
+        except:
             # TODO: Add error logging.
             pass
 
